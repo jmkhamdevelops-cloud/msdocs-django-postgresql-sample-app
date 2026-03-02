@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "ag-charts-community": "^13.1.0",
+    "ag-charts-enterprise": "^13.1.0"
+  }
+}

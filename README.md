@@ -1,102 +1,84 @@
----
-page_type: sample
-languages:
-- azdeveloper
-- python
-- bicep
-- html
-products:
-- azure
-- azure-app-service
-- azure-database-postgresql
-- azure-virtual-network
-urlFragment: msdocs-django-postgresql-sample-app
-name: Deploy a Python (Django) web app with PostgreSQL in Azure
-description: This is a Python web app using the Django framework and the Azure Database for PostgreSQL relational database service. 
----
-<!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+# StockApp
+An automated trading application with web interface.
 
-# Deploy a Python (Django) web app with PostgreSQL in Azure
+Project Idea
+A full stack web application for algorithmic swing trading. This application would use React that would interface with a django backend and postgres sql. This will automate algorithms for swing trading and bid on our behalf.  We would be using past trends for data modeling and graphically display the results in an interactive UI.
 
-This is a Python web app using the Django framework and the Azure Database for PostgreSQL relational database service. The Django app is hosted in a fully managed Azure App Service. This app is designed to be be run locally and then deployed to Azure. You can either deploy this project by following the tutorial [*Deploy a Python (Django or Flask) web app with PostgreSQL in Azure*](https://docs.microsoft.com/azure/app-service/tutorial-python-postgresql-app) or by using the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) according to the instructions below.
+Basic User Requirements
+As a user I want to be able to access this website from any platform so that I can check in on my investments anywhere
+As a user I want to be able to create an account so that I can deposit, manage, and withdrawal my funds
+As a user I want to be able to set the risk tolerance of my investments so that I can mitigate potential losses
+As a user I want to choose a threshold to automatically withdrawal my investments so that I can obtain the maximum value from them
+As a user I want to have the application manage my finances and investments so that I do not have to manually manage my investments
+As a user I want to have a main dashboard where I can see my current investments and portfolio performance so that I can monitor the effectiveness of the automatic portfolio management
+As a user I want to have the ability to see a log of trades for my portfolio so that I can see how the application is managing my funds
+As a user I want to have the ability to stop automatic portfolio management and divest my holdings so that I can withdrawal my funds
 
-Additionally, the sample application demonstrates Azure Redis Cache access by caching the restaurant details page for 60 seconds. You can add the Azure Redis Cache integration in the [secure-by-default web app + database creation wizard](https://portal.azure.com/?feature.customportal=false#create/Microsoft.AppServiceWebAppDatabaseV3), and it's also included in the [AZD template](https://github.com/Azure-Samples/python-app-service-postgresql-infra).
-
-## Requirements
-
-The [requirements.txt](./requirements.txt) has the following packages, all used by a typical data-driven Django application:
-
-| Package | Description |
-| ------- | ----------- |
-| [Django](https://pypi.org/project/Django/) | Web application framework. |
-| [pyscopg2-binary](https://pypi.org/project/psycopg-binary/) | PostgreSQL database adapter for Python. |
-| [python-dotenv](https://pypi.org/project/python-dotenv/) | Read key-value pairs from .env file and set them as environment variables. In this sample app, those variables describe how to connect to the database locally. <br><br> This package is used in the [manage.py](./manage.py) file to load environment variables. |
-| [whitenoise](https://pypi.org/project/whitenoise/) | Static file serving for WSGI applications, used in the deployed app. <br><br> This package is used in the [azureproject/production.py](./azureproject/production.py) file, which configures production settings. |
-| [django-redis](https://pypi.org/project/django-redis/) | Redis cache backend for Django. |
-
-## Run the sample
-
-This project has a [dev container configuration](.devcontainer/), which makes it easier to develop apps locally, deploy them to Azure, and monitor them. The easiest way to run this sample application is inside a GitHub codespace. Follow these steps:
-
-1. Fork this repository to your account. For instructions, see [Fork a repo](https://docs.github.com/get-started/quickstart/fork-a-repo).
-
-1. From the repository root of your fork, select **Code** > **Codespaces** > **+**.
-
-1. In the codespace terminal, run the following commands:
-
-    ```shell
-    # Run database migrations
-    python3 manage.py migrate
-    # Start the development server
-    python3 manage.py runserver
-    ```
-
-1. When you see the message `Your application running on port 8000 is available.`, click **Open in Browser**.
-
-### Quick deploy
-
-This project is designed to work well with the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview), which makes it easier to develop apps locally, deploy them to Azure, and monitor them. 
-
-🎥 Watch a deployment of the code in this [screencast](https://www.youtube.com/watch?v=JDlZ4TgPKYc).
-> Learn more about developing and deploying Django apps to Azure from Microsoft's comprehensive beginner series:
-> [Django for Beginners](https://www.youtube.com/playlist?list=PLlrxD0HtieHjHCQ0JB_RrhbQp_9ccJztr).
-
-Steps for deployment:
-
-1. Sign up for a [free Azure account](https://azure.microsoft.com/free/)
-2. Install the [Azure Dev CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd). (If you opened this repository in a Dev Container, it's already installed for you.)
-3. Initialize a new `azd` environment:
-
-    ```shell
-    azd init
-    ```
-
-    It will prompt you to provide a name (like "django-app"), which will later be used in the name of the deployed resources.
-
-4. Provision and deploy all the resources:
-
-    ```shell
-    azd up
-    ```
-
-    It will prompt you to login, pick a subscription, and provide a location (like "eastus"). Then it will provision the resources in your account and deploy the latest code. If you get an error with deployment, changing the location (like to "centralus") can help, as there may be availability constraints for some of the resources.
-
-5. When `azd` has finished deploying, you'll see an endpoint URI in the command output. Visit that URI, and you should see the front page of the restaurant review app! 🎉 If you see an error, open the Azure Portal from the URL in the command output, navigate to the App Service, select Logstream, and check the logs for any errors.
-
-    ![Screenshot of Django restaurants website](screenshot_website.png)
-
-6. If you'd like to access `/admin`, you'll need a Django superuser. Navigate to the Azure Portal for the App Service, select SSH, and run this command:
-
-    ```shell
-    python3 manage.py createsuperuser
-    ```
-
-7. When you've made any changes to the app code, you can just run:
-
-    ```shell
-    azd deploy
-    ```
-
-## Getting help
-
-If you're working with this project and running into issues, please post in [Issues](/issues).
+Product Requirements
+Platform Accessibility
+Requirement: The website should be accessible from web browser
+Details:
+Web-based UI
+Supported browsers: Chromium based browsers, Safari
+Desktop only layout
+Acceptance Criteria:
+Users can access the website from any chromium based or safari browser
+The website UI adapts to changing screen sizes
+User Account Management
+Requirement: The website shall allow users to create and manage an account to handle funds and investments
+Details:
+User registration, authentication, and session management
+User ability to deposit funds, withdrawal funds, and view balances
+Acceptance Criteria:
+User can successfully create an account
+User can login to their account
+User can logout of their account
+User deposits and withdrawals are accurately reflected in account balances
+Risk Tolerance Configuration
+Requirement: The website shall allow users to define a risk tolerance level for their investments
+Details:
+Risk level can be set to the following values [LOW, MEDIUM, HIGH]
+Risk level directly affects portfolio allocation and trading strategy
+Acceptance Criteria:
+Risk tolerance level is editable by user and saved to their account
+Portfolio behavior adjusts according to the selected risk level
+Automated Withdrawal Thresholds
+Requirement: The website shall allow users to define a threshold that will trigger automatic withdrawals
+Details:
+Threshold is set by the user and is a numeric value
+Automatic execution when the threshold is reached with no manual intervention
+Acceptance Criteria:
+Withdrawals are triggered when the thresholds are met
+Users receives notice on the dashboard when threshold triggers a withdrawal
+Automated Portfolio Management
+Requirement: The website shall automatically manage user investments based on a trading algorithm and predefined rules and strategies
+Details:
+Application continuously monitors the market conditions
+Automated trade execution aligned with user’s set risk tolerance
+No manual trading is allowed by the user
+Acceptance Criteria:
+Trades are executed without user intervention
+Portfolio changes are consistent with user risk tolerance
+User Manual Withdrawal
+Requirement: The website shall allow a user to stop automatic portfolio management and divest the current holdings
+Details:
+User can click a button on the account management screen to divest all holdings and allow them to withdrawal their funds
+Acceptance Criteria:
+Holdings are divested upon clicking the button
+User can withdrawal funds after divestment
+Portfolio Dashboard
+Requirement: The website shall provide a main dashboard summarizing portfolio status and performance
+Details:
+Shows current holdings, balances, and tick data
+Shows performance metrics including gains and losses over time
+Near real time updates (if possible)
+Acceptance Criteria:
+Dashboard reflects accurate and up to date portfolio data
+Dashboard is the first screen to show when user enters the website
+Trade History and Audit Log
+Requirement: The website shall maintain a detailed log of all trades executed on behalf of the user. The user shall be able to view this log as a tab in the website.
+Details:
+Timestamped record of buys, sells, and withdrawals
+Acceptance Criteria:
+Users can view a complete chronological trade history
+Logged data matches portfolio changes
