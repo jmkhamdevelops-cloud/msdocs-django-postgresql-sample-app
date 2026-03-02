@@ -28,14 +28,8 @@ jobs:
       # The following section in your workflow is designed to catch build issues early on the client side, before deployment. This can be helpful for debugging and validation. However, if this step significantly increases deployment time and early detection is not critical for your workflow, you may remove this section to streamline the deployment process.
       - name: Create and Start virtual environment and Install dependencies
         run: |
-          cd Backend
           python -m venv antenv
           source antenv/bin/activate
-
-      - name: Install dependencies    
-        run: |  
-          cd Backend
-          python -m pip install --upgrade pip
           pip install -r requirements.txt
                 
       # By default, when you enable GitHub CI/CD integration through the Azure portal, the platform automatically sets the SCM_DO_BUILD_DURING_DEPLOYMENT application setting to true. This triggers the use of Oryx, a build engine that handles application compilation and dependency installation (e.g., pip install) directly on the platform during deployment. Hence, we exclude the antenv virtual environment directory from the deployment artifact to reduce the payload size. 
@@ -69,9 +63,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_46A41C5DDFFB4B3281B6ED4DD6416DAC }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AB62B714F477461C99189DD96C37CF89 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E9D48E1206534CA3B993943634283D19 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E2E11DEA525F4CB59DC46D1C24731D48 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4AFCB3A737104D6E8998652C285E6631 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2B76AC01B35E4A3189BAA78A020276CA }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
